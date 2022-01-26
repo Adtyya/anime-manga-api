@@ -9,7 +9,7 @@ app.use(express.json());
 app.get('/', (req, res)=> {
   res.send('<h1>API Manga Reader By Aditya Fitriansyah</h1>');
 })
-
+// lul
 app.get('/halaman/:number', async (req,res)=>
 {
   const {number} = req.params;
