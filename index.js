@@ -9,7 +9,8 @@ app.use(express.json());
 app.get('/', (req, res)=> {
   res.send('<h1>API Manga Reader By Aditya Fitriansyah</h1>');
 })
-// lul
+app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
+
 app.get('/halaman/:number', async (req,res)=>
 {
   const {number} = req.params;
