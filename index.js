@@ -1,6 +1,7 @@
 import cheerio from 'cheerio';
 import axios from "axios";
 import express from "express";
+import request from 'request-promise';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,9 +20,9 @@ app.get('/halaman/:number', async (req,res)=>
 {
   const {number} = req.params;
   try {
-    const response = await axios.get(`${getPage}/${number}`);
-    const body = await response.data;
-    const $ = cheerio.load(body);
+    const response = await request(`${getPage}/${number}`);
+    // const body = await response.data;
+    const $ = cheerio.load(response);
     const file = $('.animepost')
     .children()
     .map(function()
@@ -43,9 +44,9 @@ app.get('/detail/:judul', async (req,res)=>
 {
   const {judul} = req.params;
   try {
-    const response = await axios.get(`${getDetail}/${judul}`);
-    const body = await response.data;
-    const $ = cheerio.load(body);
+    const response = await request(`${getDetail}/${judul}`);
+    // const body = await response.data;
+    const $ = cheerio.load(response);
     const getGenre = [];
     const getChapter = [];
     const detail = {title:"", sinopsis:"", isiSinopsis: "", genre: getGenre, chapterList: getChapter}
@@ -72,9 +73,9 @@ app.get('/detail/:judul', async (req,res)=>
 app.get('/read/:judul', async (req,res)=>{
   const {judul} = req.params;
   try {
-    const response = await axios.get(`${getRead}/${judul}`);
-    const body = await response.data;
-    const $ = cheerio.load(body);
+    const response = await request(`${getRead}/${judul}`);
+    // const body = await response.data;
+    const $ = cheerio.load(response);
     const getImg = [];
     const detail = {src: getImg}
     const genre = $('#chimg-auh img').each(function(){
