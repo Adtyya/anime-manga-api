@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.get('/', (req, res)=> {
-  res.send('<h1>API Manga Reader By Aditya Fitriansyah</h1>');
+  res.send('<h1>Halo</h1>');
 })
 app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
 
