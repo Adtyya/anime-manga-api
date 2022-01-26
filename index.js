@@ -9,7 +9,7 @@ app.use(express.json());
 app.get('/', (req, res)=> {
   res.send('<h1>Halo</h1>');
 })
-app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
+//app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
 
 app.get('/halaman/:number', async (req,res)=>
 {
