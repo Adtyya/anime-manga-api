@@ -5,6 +5,10 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const getPage = 'https://komikindo.id/daftar-komik/page';
+const getDetail = 'https://komikindo.id/komik';
+const getRead = 'https://komikindo.id';
+
 app.use(express.json());
 app.get('/', (req, res)=> {
   res.send('<h1>Halo</h1>');
@@ -15,7 +19,7 @@ app.get('/halaman/:number', async (req,res)=>
 {
   const {number} = req.params;
   try {
-    const response = await axios.get(`https://komikindo.id/daftar-komik/page/${number}`);
+    const response = await axios.get(`${getPage}/${number}`);
     const body = await response.data;
     const $ = cheerio.load(body);
     const file = $('.animepost')
@@ -39,7 +43,7 @@ app.get('/detail/:judul', async (req,res)=>
 {
   const {judul} = req.params;
   try {
-    const response = await axios.get(`https://komikindo.id/komik/${judul}`);
+    const response = await axios.get(`${getDetail}/${judul}`);
     const body = await response.data;
     const $ = cheerio.load(body);
     const getGenre = [];
@@ -68,7 +72,7 @@ app.get('/detail/:judul', async (req,res)=>
 app.get('/read/:judul', async (req,res)=>{
   const {judul} = req.params;
   try {
-    const response = await axios.get(`https://komikindo.id/${judul}`);
+    const response = await axios.get(`${getRead}/${judul}`);
     const body = await response.data;
     const $ = cheerio.load(body);
     const getImg = [];
