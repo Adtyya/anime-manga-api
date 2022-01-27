@@ -23,20 +23,20 @@ app.get('/halaman/:number', async (req,res)=>
     const response = await request(`${getPage}/${number}`);
     // const body = await response.data;
     const $ = cheerio.load(response);
+    const arr = []
     const file = $('.animepost')
     .children()
     .map(function()
     {
-        return{
-          name: $(this).find('h4').text(),
-          poster: $(this).find('img').attr('src'),
-        }
-
-    }).toArray()
-    res.json(file);
+      const obj ={name:"", poster:""}
+      obj.name =  $(this).find('h4').text();
+      obj.poster = $(this).find('img').attr('src');
+      arr.push(obj);
+    })
+    res.json(arr);
 
   } catch (error) {
-    
+    res.send('not found')
   }
 });
 
